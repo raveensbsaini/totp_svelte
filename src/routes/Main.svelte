@@ -21,7 +21,7 @@
         <input
             class="border-2"
             type="text"
-            placeholder="enter key"
+            placeholder="enter secret url"
             bind:value={uri}
         />
         <span></span>
