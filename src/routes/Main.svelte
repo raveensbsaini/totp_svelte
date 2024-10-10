@@ -25,7 +25,9 @@
             placeholder="enter url"
             bind:value={uri}
         />
-        <span class="text-red-800"> { error_message }</span>
+        {#if !is_valid_uri(uri) && uri !== ""}
+            <span class="text-red-800"> Invalid secret url </span>
+        {/if}
         <button
             class=" border-4 border-blue-400 bg-blue-300"
             onclick={async () => {
@@ -36,9 +38,6 @@
                     }
                     data.push(uri);
                     await db.add_to_localstorage(data, password);
-                }
-                else {
-                    error_message = "Invalid secret url"
                 }
             }}>add</button
         >
