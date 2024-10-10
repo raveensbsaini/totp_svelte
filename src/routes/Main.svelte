@@ -13,6 +13,7 @@
         data = (await db.read_from_localstorage(password)) ?? [];
     });
     let new_passowrd_error_message = $state("This was old password")
+    let error_message = $state("")
     let new_password = $state("")
 </script>
 
@@ -21,20 +22,23 @@
         <input
             class="border-2"
             type="text"
-            placeholder="enter secret url"
+            placeholder="enter url"
             bind:value={uri}
         />
-        <span></span>
+        <span class="text-red-800"> { error_message }</span>
         <button
             class=" border-4 border-blue-400 bg-blue-300"
             onclick={async () => {
                 if (is_valid_uri(uri)) {
                     if( data.includes(uri)){
-                        alert("Already includes")
+                        alert("Already includes") 
                         return 
                     }
                     data.push(uri);
                     await db.add_to_localstorage(data, password);
+                }
+                else {
+                    error_message = "Invalid secret url"
                 }
             }}>add</button
         >
